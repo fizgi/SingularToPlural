@@ -1,7 +1,7 @@
-""" A program for converting singular words to plural.
+""" A program for converting singular words to plural form.
 
     author: Fatih IZGI
-    date: 03-Mar-2020
+    date: 02-Mar-2020
     version: python 3.8.1
 """
 
@@ -16,7 +16,7 @@ def plural(string: str) -> str:
             string += "s"
         else:
             string = string[:-1] + "ies"  # ends eith 'y', not preceded by a vowel
-    elif string.endswith(('o','ch', 's', 'sh', 'x', 'z')):
+    elif string.endswith(('o', 'ch', 's', 'sh', 'x', 'z')):
         string += "es"
     else:
         string += "s"
@@ -25,21 +25,19 @@ def plural(string: str) -> str:
 
 
 while True:  # loop for getting valid input from the user
-    string: str = input("Please enter a string: ")
-    if all(x.isalpha() or x.isspace() for x in string):
+    single_words: str = input("Please enter a string: ")
+    if all(char.isalpha() or char.isspace() for char in single_words):
         break
-    else:
-        print("Please enter only alphabetic characters. "
-              "If you want to write multiple words, separate them with whitespace")
+    print("Please enter only alphabetic characters. "
+          "If you want to enter multiple words, separate them with whitespaces.")
 
-words: List[str] = [word for word in string.split(" ")]
-
+words: List[str] = single_words.split(" ")
 plurals: List[str] = []
 
 for word in words:
     if word != "":  # eliminate blank items, just put the words into operation
         plurals.append(plural(word))
 
-final_string: str = " ".join([plural for plural in plurals])  # join the plural forms
+final_string: str = " ".join(plurals)  # join the plural forms
 
 print(final_string)
